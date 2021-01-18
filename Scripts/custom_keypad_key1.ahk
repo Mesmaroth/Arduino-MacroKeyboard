@@ -3,8 +3,8 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 
 ;=================================
-; CUSTOM KEYPAD KEY 4
-; #NoTrayIcon
-^!+F5::
+; CUSTOM KEYPAD KEY 1
+;#NoTrayIcon
+^!+F2::
 Run, taskmgr
 return
