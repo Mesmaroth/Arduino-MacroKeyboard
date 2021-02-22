@@ -1,0 +1,37 @@
+﻿#NoEnv
+SendMode Input
+SetWorkingDir %A_ScriptDir%
+
+; CUSTOME MACRO KEYPAD
+;=================================
+#NoTrayIcon
+
+; CUSTOM KEYPAD KEY 1
+^!+F2::
+Run, taskmgr
+return
+
+; CUSTOM KEYPAD KEY 2
+^!+F3::
+Run, taskmgr
+return
+
+; CUSTOM KEYPAD KEY 3
+^!+F4::
+Run, taskmgr
+return
+
+; CUSTOM KEYPAD KEY 4
+^!+F5::
+Run, taskmgr
+return
+
+; CUSTOM KEYPAD KEY 5
+^+!F6::
+Run, taskmgr
+return
+
+; CUSTOM KEYPAD KEY 6
+^+!F7::
+Run, calc
+return

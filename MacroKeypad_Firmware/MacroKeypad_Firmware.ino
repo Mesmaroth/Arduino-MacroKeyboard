@@ -1,3 +1,7 @@
+ // Arduino Custom Macro Keypad
+ // By: Robert Sandoval
+ // 
+ 
 #include <HID-Project.h>
 
 const int push_button_1 = 4;
@@ -19,6 +23,7 @@ int pn_array[] = {
   push_button_6
   };
 
+// Default binds
 String bind_cfgs[3][6]= {
   {"#mprev", "#mplaypause", "#mnext", "#^!+F5", "#^!+F6", "#^!+F7"},
   {"#^!+F2", "#^!+F3", "#^!+F4", "#mprev", "#mplaypause", "#mnext"},
@@ -26,6 +31,10 @@ String bind_cfgs[3][6]= {
 };
 
 int btn_config = 0;
+
+boolean newData = false;
+const byte numChars = 15;
+char receivedChars[numChars];
 
 bool wait_response = false;
 int key_rebind = 0;
@@ -41,66 +50,102 @@ void setup() {
   Serial.begin(9600);
 }
 
-void loop() {
-  String command = "";  
-  if(Serial.available() > 0) {
-    while(Serial.available() > 0) {
-      command += char(Serial.read());
+// Receiving incoming data
+void recv_incoming_data() {
+    static boolean recvInProgress = false;
+    static byte ndx = 0;
+    char startMarker = '#';
+    char endMarker = '>';
+    char rc;
+ 
+    while (Serial.available() > 0 && newData == false) {
+        rc = Serial.read();
+
+        if (recvInProgress == true) {
+            if (rc != endMarker) {
+                receivedChars[ndx] = rc;
+                ndx++;
+                if (ndx >= numChars) {
+                    ndx = numChars - 1;
+                }
+            }
+            else {
+                receivedChars[ndx] = '\0'; // terminate the string
+                recvInProgress = false;
+                ndx = 0;
+                newData = true;
+            }
+        }
+        else if (rc == startMarker) {
+            recvInProgress = true;
+        }
     }
+}
+
+void loop() {
+  String cmd;
+  recv_incoming_data();  
+  if(newData) {
+    cmd = receivedChars;
+    newData = false;
   }
 
   if(wait_response) {
-    command = command.substring(1);
+    cmd = cmd.substring(1);
     rebind_key(key_rebind);
     return;
   }
 
-  command = command.substring(1,5);
-
-  if (command == "cfg1") {
-    Serial.println("Config set to 1.");
+  if (cmd == "cfg1") {
     btn_config = 0;
     return;
-  } else if (command == "cfg2") {
-    Serial.println("Config set to 2.");
+  } else if (cmd == "cfg2") {
     btn_config = 1;
     return;
-  } else if (command == "cfg3") {
-    Serial.println("Config set to 3.");
+  } else if (cmd == "cfg3") {
     btn_config = 2;
     return;
-  } else if(command == "pcfg") {
+    // Get just the binds for the current config you're on
+  } else if(cmd == "gcfg") {
+    get_current_binds(btn_config);
+    return;
+    // Print all configs
+  } else if(cmd == "pcfg") {
     print_cfg();
+    return;
+    // Get current config integer
+  } else if(cmd == "bcfg") {
+    Serial.println("C:" + (String)btn_config);
     return;
   }
 
-  if (command == "rbd1") {
+  if (cmd == "rbd1") {
     wait_response = true;
     key_rebind = 1;
     return;
-  } else if(command == "rbd2") {
+  } else if(cmd == "rbd2") {
     wait_response = true;
     key_rebind = 2;
     return;
-  } else if(command == "rbd3") {
+  } else if(cmd == "rbd3") {
     wait_response = true;
     key_rebind = 3;
     return;
-  } else if(command == "rbd4") {
+  } else if(cmd == "rbd4") {
     wait_response = true;
     key_rebind = 4;
     return;
-  } else if(command == "rbd5") {
+  } else if(cmd == "rbd5") {
     wait_response = true;
     key_rebind = 5;
     return;
-  } else if(command == "rbd6") {
+  } else if(cmd == "rbd6") {
     wait_response = true;
     key_rebind = 6;
     return;
   }
 
-  if(command == "test") {
+  if(cmd == "test") {
     Serial.println("Reading binds...");
     String bind = "";
     bool binding = true;
@@ -121,49 +166,49 @@ void loop() {
     return;
   }
   
-  if (!digitalRead(push_button_1) || command.equals("bton")) {
+  if (!digitalRead(push_button_1) || cmd.equals("bton")) {
     delay(debounce_delay);
-    if(digitalRead(push_button_1) || command.equals("bton")) {
+    if(digitalRead(push_button_1) || cmd.equals("bton")) {
       button_one();
       return;
     }
   }
   
-  if (!digitalRead(push_button_2) || command.equals("bttw")) {
+  if (!digitalRead(push_button_2) || cmd.equals("bttw")) {
     delay(debounce_delay);
-    if(digitalRead(push_button_2) || command.equals("bttw")) {
+    if(digitalRead(push_button_2) || cmd.equals("bttw")) {
       button_two();
       return;
     }
   }
     
-  if (!digitalRead(push_button_3) || command.equals("bttr")) {
+  if (!digitalRead(push_button_3) || cmd.equals("bttr")) {
     delay(debounce_delay);
-    if(digitalRead(push_button_3) || command.equals("bttr")) {
+    if(digitalRead(push_button_3) || cmd.equals("bttr")) {
       button_three();
       return;
     }
   }
     
-  if (!digitalRead(push_button_4) || command.equals("btfr")) {
+  if (!digitalRead(push_button_4) || cmd.equals("btfr")) {
     delay(debounce_delay);
-    if (digitalRead(push_button_4) || command.equals("btfr")) {
+    if (digitalRead(push_button_4) || cmd.equals("btfr")) {
       button_four();
       return;
     }
   }
     
-  if (!digitalRead(push_button_5) || command.equals("btfv")) {
+  if (!digitalRead(push_button_5) || cmd.equals("btfv")) {
     delay(debounce_delay);
-    if (digitalRead(push_button_5) || command.equals("btfv")) {
+    if (digitalRead(push_button_5) || cmd.equals("btfv")) {
       button_five();
       return;
     }
   }
     
-  if (!digitalRead(push_button_6) || command.equals("btsx")) {
+  if (!digitalRead(push_button_6) || cmd.equals("btsx")) {
     delay(debounce_delay);
-    if (digitalRead(push_button_6) || command.equals("btsx")) {
+    if (digitalRead(push_button_6) || cmd.equals("btsx")) {
       button_six();
       return;
     }
@@ -185,9 +230,9 @@ void rebind_key(int key) {
         binding = false;
         bind.trim();
         bind_cfgs[btn_config][key-1] = bind;
-        Serial.println(bind);
+        //Serial.println(bind);
         Serial.println("Binded " + bind + " to " + key + " on Config " + btn_config);
-        print_cfg();
+        //print_cfg();
         break;
       }
       delay(500);
@@ -196,12 +241,33 @@ void rebind_key(int key) {
 }
 
 void print_cfg() {
+  Serial.print("<");
   for(int x = 0; x < 3; x++) {
     for(int y = 0; y < 6; y++) {
-      Serial.print(bind_cfgs[x][y] + " ");
+      if(y != 5) {
+        Serial.print(bind_cfgs[x][y] + ",");
+      } else {
+        Serial.print(bind_cfgs[x][y]);
+      }
     }
-    Serial.println();
   }
+  Serial.print(">\n");  
+}
+
+void get_current_binds(int bind) {
+  String prt_bind[6];
+  for (int i = 0; i < 6; i++) {
+    prt_bind[i] = bind_cfgs[btn_config][i];
+  }
+  Serial.print("<");
+  for(int i = 0; i < 6; i++) {
+    if(i != 5) {
+      Serial.print(prt_bind[i] + ",");
+    } else {
+      Serial.print(prt_bind[i]);
+    }
+  }
+  Serial.print(">\n");  
 }
 
 void execute_bind(String bind) {
@@ -240,15 +306,9 @@ void execute_bind(String bind) {
     }     
     key+=bind[i];    
   }
+  
   bind.trim();
   key.trim();
-  
-  Serial.println(bind);
-  Serial.println(key);
-  Serial.println(ctrl_bind);
-  Serial.println(alt_bind);
-  Serial.println(shift_bind);
-  Serial.println(func_bind);
 
   // Execute Binds
   if(bind.equals("mprev")) {
