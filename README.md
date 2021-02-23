@@ -1,2 +1,2 @@
-# arduino-custom-keypad
-Custom 6 keypad for the Arduino
+# Arduino 6 Key Macro Keypad
+Arduino 6 Key Macro Keypad
