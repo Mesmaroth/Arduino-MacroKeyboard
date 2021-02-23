@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Macro_Keypad_Binder_v1")]
-[assembly: AssemblyDescription("Macro_Keypad_Binder_v1")]
+[assembly: AssemblyTitle("Macro Key Binder")]
+[assembly: AssemblyDescription("Macro Key Binder")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Robert Sandoval")]
-[assembly: AssemblyProduct("Macro_Keypad_Binder_v1")]
+[assembly: AssemblyProduct("Macro Key Binder")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

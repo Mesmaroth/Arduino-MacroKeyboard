@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.Threading;
 
-namespace WindowsFormsApp1
+namespace MacroKeypadBinder
 {
     public partial class MainMacroKeypad : Form
     {

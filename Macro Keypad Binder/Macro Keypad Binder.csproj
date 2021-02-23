@@ -7,7 +7,7 @@
     <ProjectGuid>{54EFA882-4534-47DE-B2B6-9C5AA56CCA22}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Macro_Keypad_Binder</RootNamespace>
-    <AssemblyName>Macro_Keypad_Binder</AssemblyName>
+    <AssemblyName>Macro Key Binder</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -80,28 +80,28 @@
     <Compile Include="BindingForm.Designer.cs">
       <DependentUpon>BindingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMacroKeypad.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMacroKeypad.Designer.cs">
-      <DependentUpon>MainMacroKeypad.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="about_form.cs">
+    <Compile Include="AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="about_form.Designer.cs">
-      <DependentUpon>about_form.cs</DependentUpon>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="BindingForm.resx">
       <DependentUpon>BindingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMacroKeypad.resx">
-      <DependentUpon>MainMacroKeypad.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="about_form.resx">
-      <DependentUpon>about_form.cs</DependentUpon>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
