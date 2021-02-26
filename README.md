@@ -17,7 +17,7 @@ This project features a rebindable six key macro keyboard powered by an Arduino(
 <br />
 
 # Macro Key Binder (Windows)
-Developed in .NET Framework 4.7.2.
+Developed in [.NET Framework 4.7.2](https://dotnet.microsoft.com/download/dotnet-framework/net472)
 
 Current Features:
 * Rebind Keys.
