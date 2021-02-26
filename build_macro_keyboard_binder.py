@@ -1,4 +1,4 @@
-# Build Script for the Macro Keyboard Binder
+# Simple script to package release builds
 # By Robert Sandoval
 from zipfile import ZipFile
 import os
