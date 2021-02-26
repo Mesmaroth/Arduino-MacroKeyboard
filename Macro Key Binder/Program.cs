@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MacroKeypadBinder
+namespace MacroKeyBoardBinder
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace MacroKeypadBinder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainMacroKeypad());
+            Application.Run(new MainMacroKeyboard());
         }
     }
 }

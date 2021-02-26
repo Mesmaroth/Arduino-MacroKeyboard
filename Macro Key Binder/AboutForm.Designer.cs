@@ -1,5 +1,5 @@
 ﻿
-namespace MacroKeypadBinder
+namespace MacroKeyBoardBinder
 {
     partial class form_about
     {
@@ -112,7 +112,7 @@ namespace MacroKeypadBinder
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Orange;
-            this.label3.Location = new System.Drawing.Point(41, 84);
+            this.label3.Location = new System.Drawing.Point(32, 84);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(98, 15);
             this.label3.TabIndex = 7;

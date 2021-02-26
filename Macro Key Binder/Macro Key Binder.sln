@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macro Keypad Binder", "Macro Keypad Binder.csproj", "{54EFA882-4534-47DE-B2B6-9C5AA56CCA22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macro Key Binder", "Macro Key Binder.csproj", "{54EFA882-4534-47DE-B2B6-9C5AA56CCA22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

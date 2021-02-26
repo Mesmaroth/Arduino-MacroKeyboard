@@ -1,4 +1,8 @@
-﻿using System;
+﻿//  Macro Key Binder
+//  for the Arduino Macro Keyboard
+//  By Robert Sandoval 2021
+//
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MacroKeypadBinder
+namespace MacroKeyBoardBinder
 {
     public partial class form_about : Form
     {

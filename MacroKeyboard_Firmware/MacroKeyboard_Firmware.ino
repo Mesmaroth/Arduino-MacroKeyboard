@@ -1,4 +1,4 @@
- // Arduino Custom Macro Keypad
+ // Arduino Custom Macro Keyboard
  // By: Robert Sandoval
  // 
  
@@ -25,9 +25,9 @@ int pn_array[] = {
 
 // Default binds
 String bind_cfgs[3][6]= {
-  {"#mprev", "#mplaypause", "#mnext", "#^!+F5", "#^!+F6", "#^!+F7"},
-  {"#^!+F2", "#^!+F3", "#^!+F4", "#mprev", "#mplaypause", "#mnext"},
-  {"#^!+F2", "#^!+F3", "#^!+F4", "#^!+F5", "#^!+F6", "#^!+F7"}
+  {"#mprev", "#mplaypause", "#mnext", "#^+!F5", "#^+!F6", "#^+!F7"},
+  {"#^+!F2", "#^+!F3", "#^+!F4", "#mprev", "#mplaypause", "#mnext"},
+  {"#^+!F2", "#^+!F3", "#^+!F4", "#^+!F5", "#^+!F6", "#^+!F7"}
 };
 
 int btn_config = 0;

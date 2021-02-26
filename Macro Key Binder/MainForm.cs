@@ -1,5 +1,5 @@
-﻿//  Macro Keypad Binder
-//  for the Arduino
+﻿//  Macro Key Binder
+//  for the Arduino Macro Keyboard
 //  By Robert Sandoval 2021
 //
 using System;
@@ -9,9 +9,9 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO.Ports;
 
-namespace MacroKeypadBinder
+namespace MacroKeyBoardBinder
 {
-    public partial class MainMacroKeypad : Form
+    public partial class MainMacroKeyboard : Form
     {
         static SerialPort _serialPort;
         static List<String> rawCFG = new List<string>();
@@ -20,7 +20,7 @@ namespace MacroKeypadBinder
         bool isConnected = false;
         bool debug_mode = false;
 
-        public MainMacroKeypad()
+        public MainMacroKeyboard()
         {
             InitializeComponent();
             string[] ports = SerialPort.GetPortNames();            

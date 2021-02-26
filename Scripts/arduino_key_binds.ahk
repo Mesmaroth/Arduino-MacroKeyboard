@@ -1,4 +1,4 @@
-﻿; Key binds for the Arduino Macro Keypad
+﻿; Key binds for the Arduino Macro Keyboard
 ; By Robert Sandoval 2021
 ;=================================
 

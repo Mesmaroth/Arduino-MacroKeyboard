@@ -1,5 +1,5 @@
-﻿//  Macro Keypad Binder
-//  for the Arduino
+﻿//  Macro Key Binder
+//  for the Arduino Macro Keyboard
 //  By Robert Sandoval 2021
 //
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO.Ports;
 
-namespace MacroKeypadBinder
+namespace MacroKeyBoardBinder
 {
     public partial class BindingForm : Form
     {

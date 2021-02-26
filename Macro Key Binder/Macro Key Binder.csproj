@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{54EFA882-4534-47DE-B2B6-9C5AA56CCA22}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Macro_Keypad_Binder</RootNamespace>
+    <RootNamespace>Macro_Key_Binder</RootNamespace>
     <AssemblyName>Macro Key Binder</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

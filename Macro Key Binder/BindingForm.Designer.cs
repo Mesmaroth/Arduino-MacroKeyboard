@@ -1,5 +1,5 @@
 ﻿
-namespace MacroKeypadBinder
+namespace MacroKeyBoardBinder
 {
     partial class BindingForm
     {
