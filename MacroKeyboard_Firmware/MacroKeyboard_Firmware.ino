@@ -1,9 +1,10 @@
  // Arduino Custom Macro Keyboard
  // By: Robert Sandoval
- // 
- 
+ //
+  
 #include <HID-Project.h>
 
+// Pin Buttons
 const int push_button_1 = 4;
 const int push_button_2 = 3;
 const int push_button_3 = 2;
