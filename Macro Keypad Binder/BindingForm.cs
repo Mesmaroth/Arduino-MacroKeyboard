@@ -1,17 +1,13 @@
-﻿//  Custom Macro Keypad Binder
+﻿//  Macro Keypad Binder
+//  for the Arduino
 //  By Robert Sandoval 2021
 //
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO.Ports;
-using System.Threading;
 
 namespace MacroKeypadBinder
 {
@@ -19,10 +15,17 @@ namespace MacroKeypadBinder
     {
         SerialPort Serial;
         int CurrentButtonCfg;
-        String[] keys;
-        // The main key to which other keys are grouped together with.
-        String BindKey = "";
         int current_config;
+
+        // If a key has been binded
+        bool Binded = false;
+
+        // List of Keys available for binding
+        String[] keys;
+
+        // The main key to which alternative keys are grouped together with
+        // Key selected from the list of keys
+        String BindKey = "";
 
         public BindingForm(int button_cfg, SerialPort serial, int config, String currentBind)
         {
@@ -33,7 +36,7 @@ namespace MacroKeypadBinder
             config_title_label.Text = $"Button {CurrentButtonCfg + 1}";
             keys = list_keys.Items.Cast<String>().ToArray();
             current_bind_label.Text = currentBind;
-            new_bind_label.Text = "";            
+            new_bind_label.Text = "";
         }
 
         private void Test_Button_Click(object sender, EventArgs e)
@@ -345,6 +348,7 @@ namespace MacroKeypadBinder
             timer.Tick += (s, e) =>
             {
                 Serial.Write($"#{parsed_bind}\n");
+                Binded = true;
                 BindSuccessMessage();
                 current_bind_label.Text = new_bind_label.Text;
                 new_bind_label.Text = "";
@@ -375,8 +379,10 @@ namespace MacroKeypadBinder
 
         private void OnApplicationClose(object sender, FormClosedEventArgs e)
         {
-            Serial.Write("#gcfg>\n");
+            if(Binded)
+            {
+                Serial.Write("#gcfg>\n");
+            }
         }
-
     }
 }

@@ -15,6 +15,8 @@ namespace MacroKeypadBinder
         public form_about()
         {
             InitializeComponent();
+            var version = System.Windows.Forms.Application.ProductVersion;
+            version_label.Text = version;
         }
 
         private void button1_Click(object sender, EventArgs e)

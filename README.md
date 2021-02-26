@@ -1,2 +1,2 @@
-# Arduino 6 Key Macro Keypad
-Arduino 6 Key Macro Keypad
+# Arduino Six-Key Macro Keypad Project
+

@@ -1,16 +1,13 @@
-﻿//  Custom Macro Keypad Binder
+﻿//  Macro Keypad Binder
+//  for the Arduino
 //  By Robert Sandoval 2021
 //
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
-using System.Threading;
 
 namespace MacroKeypadBinder
 {
@@ -26,7 +23,7 @@ namespace MacroKeypadBinder
         public MainMacroKeypad()
         {
             InitializeComponent();
-            string[] ports = SerialPort.GetPortNames();
+            string[] ports = SerialPort.GetPortNames();            
 
             if(ports.Length == 0)
             {
@@ -54,6 +51,11 @@ namespace MacroKeypadBinder
             }
             menuStrip1.Renderer = new ToolStripProfessionalRenderer(new ColorTable());
 
+            connect_MenuItem.Text += $" ({comboBox1.SelectedItem})";
+            notifyIcon.Text += $" {Application.ProductVersion}";
+
+            // DEBUG ONLY
+            //debugToolStripMenuItem.Visible = true;
         }
 
         // Tool Bar Color Scheme
@@ -257,25 +259,15 @@ namespace MacroKeypadBinder
 
                 if (rawCMD.Contains("<") && rawCMD.Contains(">"))
                 {
+                    // Remove previous bind and add new bind
                     rawCMD = rawCMD.Substring(rawCMD.IndexOf("<"), rawCMD.IndexOf(">") - rawCMD.IndexOf("<"));                    
-
+                    // Remove beginning and end command 
                     rawCMD = rawCMD.Replace("<", String.Empty);
                     rawCMD = rawCMD.Replace(">", String.Empty);
 
-                    cmd = rawCMD;
-
-                    //Console.WriteLine($"ParseBind: {cmd}");
+                    key_binds = rawCMD.Split(',').ToList<String>();
                     rawCFG.Clear();
-
-                    key_binds = cmd.Split(',').ToList<String>();
-
-                    Console.WriteLine("--BINDS--");
-                    key_binds.ForEach(i => {
-                        Console.WriteLine(i);
-                    });
-                    Console.WriteLine("---------------");
-                }
-                
+                }                
             }
         }
 
@@ -298,8 +290,10 @@ namespace MacroKeypadBinder
                 _serialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
                 _serialPort.Open();
                 _serialPort.WriteLine("#bcfg>");
-                //_serialPort.WriteLine("#gcfg\n");
                 enableButtons();
+                connect_MenuItem.Visible = false;
+                config_ToolMenuItem.Visible = true;
+                disconnect_MenuItem.Visible = true;
 
                 // Update Serial Connect Button
                 btn_connect.Text = "Disconnect";
@@ -325,6 +319,9 @@ namespace MacroKeypadBinder
             _serialPort.Close();
             _serialPort.Dispose();
             disableButtons();
+            connect_MenuItem.Visible = true;
+            config_ToolMenuItem.Visible = false;
+            disconnect_MenuItem.Visible = false;
             btn_connect.Enabled = false;
             DisplayError("Closing Connection...", close_delay);
             var timer = new System.Windows.Forms.Timer();
@@ -371,7 +368,6 @@ namespace MacroKeypadBinder
                 };
                 timer.Start();
             }
-
         }
 
         private String ReadBind(string bind)
@@ -441,7 +437,6 @@ namespace MacroKeypadBinder
         }
 
         // ------- BUTTONS ------------
-
         private void btn_connect_Click(object sender, EventArgs e)
         {
             if (isConnected)
@@ -535,6 +530,7 @@ namespace MacroKeypadBinder
             }
         }
 
+        // Change Config
         private void cmb_box_config_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(isConnected)
@@ -545,28 +541,40 @@ namespace MacroKeypadBinder
                     _serialPort.Write("#cfg1>");
                     config = 1;
                     _serialPort.Write("#gcfg>");
+                    config1_MenuItem.Checked = true;
+                    config2_MenuItem.Checked = false;
+                    config3_MenuItem.Checked = false;
                 } else if(cmb_config.Equals("2"))
                 {
                     _serialPort.Write("#cfg2>");
                     config = 2;
                     _serialPort.Write("#gcfg>");
+                    config1_MenuItem.Checked = false;
+                    config2_MenuItem.Checked = true;
+                    config3_MenuItem.Checked = false;
                 } else if(cmb_config.Equals("3"))
                 {
                     _serialPort.Write("#cfg3>");
                     config = 3;
                     _serialPort.Write("#gcfg>");
+                    config1_MenuItem.Checked = false;
+                    config2_MenuItem.Checked = false;
+                    config3_MenuItem.Checked = true;
                 } else
                 {
                     _serialPort.Write("#cfg1>");
                     config = 1;
                     _serialPort.Write("#gcfg>");
+                    config1_MenuItem.Checked = true;
+                    config2_MenuItem.Checked = false;
+                    config3_MenuItem.Checked = false;
                 }
             }
         }
 
         private void debug_btn_click(object sender, EventArgs e)
         {
-            Console.WriteLine();
+            Console.WriteLine("---- BINDS ----");
             if(key_binds != null)
             {
                 key_binds.ForEach(Console.WriteLine);
@@ -611,5 +619,71 @@ namespace MacroKeypadBinder
                 comboBox1.SelectedIndex = -1;
             }
         }
+
+        // Notify Icon
+        private void exitToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (_serialPort != null)
+            {
+                _serialPort.Close();
+            }
+            Application.Exit();
+        }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            form_about f2 = new form_about();
+            f2.ShowDialog();
+        }
+
+        private void config1_MenuItem_Click(object sender, EventArgs e)
+        {
+            if(isConnected)
+            {
+                cmb_box_config.Text = "1";
+            }
+        }
+
+        private void config2_MenuItem_Click(object sender, EventArgs e)
+        {
+            if(isConnected)
+            {
+                cmb_box_config.Text = "2";
+            }
+        }
+
+        private void config3_MenuItem_Click(object sender, EventArgs e)
+        {
+            cmb_box_config.Text = "3";
+        }
+
+        private void connect_MenuItem_Click(object sender, EventArgs e)
+        {
+            if (!(isConnected))
+            {
+                SerialConnect();
+            }
+        }
+
+        private void disconnect_MenuItem_Click(object sender, EventArgs e)
+        {
+            if (isConnected)
+            {
+                SerialDisconnect();
+            }
+        }
+
+        private void notifyIcon_DoubleClick(object Sender,EventArgs e)
+        {
+            // Show the form when the user double clicks on the notify icon.
+
+            // Set the WindowState to normal if the form is minimized.
+            if (WindowState == FormWindowState.Minimized)
+            {
+                WindowState = FormWindowState.Normal;
+                Activate();
+            }          
+        }
+
     }
 }

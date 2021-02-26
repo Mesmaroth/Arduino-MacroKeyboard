@@ -30,6 +30,8 @@ namespace MacroKeypadBinder
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMacroKeypad));
             this.btn_2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_connect = new System.Windows.Forms.Button();
@@ -51,8 +53,20 @@ namespace MacroKeypadBinder
             this.label2 = new System.Windows.Forms.Label();
             this.debug_btn = new System.Windows.Forms.Button();
             this.error_label = new System.Windows.Forms.Label();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notify_contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.config_ToolMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.config1_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.config2_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.config3_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.connect_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.disconnect_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.notify_contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_2
@@ -239,9 +253,10 @@ namespace MacroKeypadBinder
             this.debugToolStripMenuItem.CheckOnClick = true;
             this.debugToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.debugToolStripMenuItem.Text = "Debug Mode";
             this.debugToolStripMenuItem.ToolTipText = "Enable debug mode.";
+            this.debugToolStripMenuItem.Visible = false;
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
@@ -249,7 +264,7 @@ namespace MacroKeypadBinder
             this.exitToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.exitToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -325,6 +340,92 @@ namespace MacroKeypadBinder
             this.error_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.error_label.Visible = false;
             // 
+            // notifyIcon
+            // 
+            this.notifyIcon.ContextMenuStrip = this.notify_contextMenu;
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "Macro Keypad Binder";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            // 
+            // notify_contextMenu
+            // 
+            this.notify_contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.connect_MenuItem,
+            this.config_ToolMenuItem,
+            this.disconnect_MenuItem,
+            this.toolStripSeparator1,
+            this.aboutMenuItem,
+            this.exitMenuItem});
+            this.notify_contextMenu.Name = "notify_contextMenu";
+            this.notify_contextMenu.Size = new System.Drawing.Size(181, 142);
+            // 
+            // config_ToolMenuItem
+            // 
+            this.config_ToolMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.config1_MenuItem,
+            this.config2_MenuItem,
+            this.config3_MenuItem});
+            this.config_ToolMenuItem.Name = "config_ToolMenuItem";
+            this.config_ToolMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.config_ToolMenuItem.Text = "Config";
+            this.config_ToolMenuItem.Visible = false;
+            // 
+            // config1_MenuItem
+            // 
+            this.config1_MenuItem.Name = "config1_MenuItem";
+            this.config1_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.config1_MenuItem.Text = "Config 1";
+            this.config1_MenuItem.Click += new System.EventHandler(this.config1_MenuItem_Click);
+            // 
+            // config2_MenuItem
+            // 
+            this.config2_MenuItem.Name = "config2_MenuItem";
+            this.config2_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.config2_MenuItem.Text = "Config 2";
+            this.config2_MenuItem.Click += new System.EventHandler(this.config2_MenuItem_Click);
+            // 
+            // config3_MenuItem
+            // 
+            this.config3_MenuItem.Name = "config3_MenuItem";
+            this.config3_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.config3_MenuItem.Text = "Config 3";
+            this.config3_MenuItem.Click += new System.EventHandler(this.config3_MenuItem_Click);
+            // 
+            // aboutMenuItem
+            // 
+            this.aboutMenuItem.Name = "aboutMenuItem";
+            this.aboutMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutMenuItem.Text = "About";
+            this.aboutMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
+            // 
+            // exitMenuItem
+            // 
+            this.exitMenuItem.Name = "exitMenuItem";
+            this.exitMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitMenuItem.Text = "Exit";
+            this.exitMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
+            // 
+            // connect_MenuItem
+            // 
+            this.connect_MenuItem.Name = "connect_MenuItem";
+            this.connect_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.connect_MenuItem.Text = "Connect";
+            this.connect_MenuItem.Click += new System.EventHandler(this.connect_MenuItem_Click);
+            // 
+            // disconnect_MenuItem
+            // 
+            this.disconnect_MenuItem.Name = "disconnect_MenuItem";
+            this.disconnect_MenuItem.Size = new System.Drawing.Size(180, 22);
+            this.disconnect_MenuItem.Text = "Disconnect";
+            this.disconnect_MenuItem.Visible = false;
+            this.disconnect_MenuItem.Click += new System.EventHandler(this.disconnect_MenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
             // MainMacroKeypad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,15 +446,17 @@ namespace MacroKeypadBinder
             this.Controls.Add(this.menuStrip1);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MainMacroKeypad";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Macro Keypad Binder (Beta)";
+            this.Text = "Macro Keypad Binder";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.notify_contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,6 +485,17 @@ namespace MacroKeypadBinder
         private System.Windows.Forms.Label error_label;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.Button port_refresh_btn;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ContextMenuStrip notify_contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem config_ToolMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem config1_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem config2_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem config3_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem connect_MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem disconnect_MenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
