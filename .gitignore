@@ -287,4 +287,7 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+Build
+Resources
 3D_Enclosure
+build_macro_keypad_binder.py
