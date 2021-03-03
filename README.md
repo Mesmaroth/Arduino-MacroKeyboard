@@ -2,6 +2,8 @@
 
 This project features a rebindable six key macro keyboard powered by an Arduino (ATmega32u4). This project is still a work-in-progress. Anyone is welcome to branch off and modify this project to how they see fit. The Macro Key Binder is only supported in Windows only. There are no plans for a MacOS or Linux support. How ever you can still rebind keys through [Serial](#Serial-Command-Protocol). You may run into issues rebinding on MacOS since the firmware is written for non-Mac keys.
 
+![Flowchart](images/flow_chart.png)
+
 <br />
 
 # TODO
